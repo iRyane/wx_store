@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gree.modules.wx.mapper.GoodsMapper">
+
+    <resultMap id = "goods" type = "com.gree.modules.wx.entity.Goods">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="original_price" property="originalPrice"/>
+        <result column="actual_price" property="actualPrice"/>
+        <result column="description" property="description"/>
+        <result column="stock" property="stock"/>
+        <!--<result column="picture" property="picture"/>-->
+    </resultMap>
+
+    <select id="list" resultType="com.gree.modules.wx.entity.Goods">
+        select
+          *
+        from
+          wx_goods wg
+          left join wx_goods_picture wgp on wg.id = wgp.goods_id
+    </select>
+</mapper>
