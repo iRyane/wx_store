@@ -74,7 +74,7 @@ public class GoodsController {
     @PostMapping("/uploadImg")
     public ResponseEntity uploadImg(@RequestParam("goodsId")Long goodsId, @RequestParam("file") MultipartFile file) throws Exception {
 
-        String filePath = "E:/Develop/Files/Photos";  //图片存放路径
+        String filePath = "E:/Develop/Files/Photos/";  //图片存放路径
         String fileName = file.getOriginalFilename();  //图片名
 
         //调用文件处理类FileUtil，处理文件，将文件写入指定位置
@@ -92,7 +92,7 @@ public class GoodsController {
             logger.error("get server host Exception e:", e);
         }
 
-        String imgPath = (host + ":" + port + "/Develop/Files/Photos/" + fileName).toString();
+        String imgPath = ("http://" + host + ":" + port + "/Develop/Files/Photos/" + fileName).toString();
         GoodsPicture goodsPicture = new GoodsPicture();
         goodsPicture.setGoodsId(goodsId);
         goodsPicture.setPicture(imgPath);

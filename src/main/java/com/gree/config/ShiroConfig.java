@@ -20,17 +20,9 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
-//		filterChainDefinitionMap.put("/swagger-resources", "anon");
-//		filterChainDefinitionMap.put("/v2/api-docs", "anon");
-//		filterChainDefinitionMap.put("/webjars/**", "anon");
-//		filterChainDefinitionMap.put("/css/**", "anon");
-//		filterChainDefinitionMap.put("/js/**", "anon");
-//		filterChainDefinitionMap.put("/fonts/**", "anon");
-//		filterChainDefinitionMap.put("/img/**", "anon");
 		filterChainDefinitionMap.put("/druid/**", "anon");
 		filterChainDefinitionMap.put("/logout", "logout");
-		filterChainDefinitionMap.put("/", "anon");
+		filterChainDefinitionMap.put("/**", "anon");
 		filterChainDefinitionMap.put("/wx/**", "anon");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
