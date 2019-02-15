@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -63,9 +64,9 @@ public class GoodsController {
 
     @ApiOperation(value = "添加商品")
     @PostMapping("/add")
-    public ResponseEntity add(@RequestBody GoodsForm goodsForm){
+    public ResponseEntity add(@RequestBody @Valid GoodsForm goodsForm){
         Goods goods = new Goods();
-        BeanUtils.copyProperties(goods, goodsForm);
+        BeanUtils.copyProperties(goodsForm, goods);
         goodsService.add(goods);
         return ResultUtil.success(goods,HttpStatus.CREATED);
     }

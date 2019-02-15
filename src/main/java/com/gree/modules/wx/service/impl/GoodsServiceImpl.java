@@ -11,8 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -29,7 +28,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 	@Override
 	public int add(Goods goods){
-
+		
+		//根据时间和四位随机数自动生成商品编码
 		int num = 1000 + (int)(Math.random() * 9000);
  		String code = "SP" + DateUtils.getCurrentDataString() + num;
  		goods.setCode(code);
@@ -39,13 +39,19 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 	@Override
 	public List<Goods> queryAll() {
-		return baseMapper.list();
+		List<Goods> list = this.list();
+		for(Goods good : list){
+			List<String> pictures = goodsPictureService.query(good.getId());
+			good.setPicture(pictures);
+		}
+		return list;
 	}
 
 	@Override
 	public Goods query(Long goodsId){
 		Goods goods = baseMapper.selectById(goodsId);
-		List<Map<String,Object>> list = goodsPictureService.listMaps(new QueryWrapper<GoodsPicture>().eq("goods_id",goodsId));
+		List<String> pictures = goodsPictureService.query(goodsId);
+		goods.setPicture(pictures);
 
 		return goods;
 	}

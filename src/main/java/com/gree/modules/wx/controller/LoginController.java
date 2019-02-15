@@ -2,6 +2,7 @@ package com.gree.modules.wx.controller;
 
 import com.gree.common.utils.MD5Utils;
 import com.gree.common.utils.ResultUtil;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
+	@ApiOperation(value = "登陆")
 	@PostMapping("/login")
 	public ResponseEntity login(String username, String password) {
 		password = MD5Utils.encrypt(username, password);

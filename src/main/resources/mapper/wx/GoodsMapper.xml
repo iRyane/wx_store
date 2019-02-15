@@ -11,14 +11,14 @@
         <result column="actual_price" property="actualPrice"/>
         <result column="description" property="description"/>
         <result column="stock" property="stock"/>
-        <!--<result column="picture" property="picture"/>-->
     </resultMap>
 
     <select id="list" resultType="com.gree.modules.wx.entity.Goods">
         select
-          *
+          wg.*,GROUP_CONCAT(wgp.picture) as picture
         from
           wx_goods wg
-          left join wx_goods_picture wgp on wg.id = wgp.goods_id
+        left join wx_goods_picture wgp on wg.id = wgp.goods_id
+        GROUP BY wg.id
     </select>
 </mapper>
