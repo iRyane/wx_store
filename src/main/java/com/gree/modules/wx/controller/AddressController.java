@@ -1,6 +1,7 @@
 package com.gree.modules.wx.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gree.common.utils.ResultUtil;
 import com.gree.modules.wx.entity.Address;
 import com.gree.modules.wx.service.AddressService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -29,14 +32,14 @@ public class AddressController {
     @PostMapping("/add")
     public ResponseEntity add(@RequestBody Address address){
         addressService.save(address);
-        return ResultUtil.success(HttpStatus.CREATED);
+        return ResultUtil.success(address,HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "查看收货地址")
+    @ApiOperation(value = "查看用户收货地址")
     @GetMapping("/list")
-    public ResponseEntity list(){
-        addressService.list();
-        return ResultUtil.success(HttpStatus.OK);
+    public ResponseEntity list(@RequestParam Long userId){
+        List<Address> list = addressService.list(new QueryWrapper<Address>().eq("user_id", userId));
+        return ResultUtil.success(list, HttpStatus.OK);
     }
 
     @ApiOperation(value = "删除收货地址")

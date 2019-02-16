@@ -19,6 +19,8 @@ public interface ShopCarService extends IService<ShopCar> {
      * 查看购物车内商品
      * @return
      */
-    List<ShopCar> queryAll();
+    List<ShopCar> queryAll(Long userId);
+
+    int deleteBatch(List<Long> goodsId);
 
 }

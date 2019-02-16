@@ -1,5 +1,6 @@
 package com.gree.modules.wx.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gree.modules.wx.entity.Goods;
 import com.gree.modules.wx.service.GoodsService;
 import com.gree.modules.wx.service.ShopCarService;
@@ -25,8 +26,8 @@ public class ShopCarServiceImpl extends ServiceImpl<ShopCarMapper, ShopCar> impl
     private GoodsService goodsService;
 
     @Override
-    public List<ShopCar> queryAll() {
-        List<ShopCar> list = this.list();
+    public List<ShopCar> queryAll(Long userId) {
+        List<ShopCar> list = this.list(new QueryWrapper<ShopCar>().eq("user_id", userId));
         for(ShopCar shopCar : list){
             Goods goods = goodsService.getById(shopCar.getGoodsId());
             shopCar.setGoodsName(goods.getGoodsName());
@@ -38,5 +39,10 @@ public class ShopCarServiceImpl extends ServiceImpl<ShopCarMapper, ShopCar> impl
             }
         }
         return list;
+    }
+
+    @Override
+    public int deleteBatch(List<Long> goodsId) {
+        return baseMapper.deleteBatch(goodsId);
     }
 }

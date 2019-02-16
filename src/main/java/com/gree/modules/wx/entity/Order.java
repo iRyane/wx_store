@@ -34,12 +34,6 @@ public class Order implements Serializable {
     private String code;
 
     /**
-     * 数量
-     */
-    @TableField("number")
-    private Integer number;
-
-    /**
      * 用户ID
      */
     @TableField("user_id")

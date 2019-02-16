@@ -2,6 +2,9 @@ package com.gree.modules.wx.service;
 
 import com.gree.modules.wx.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gree.modules.wx.form.OrderForm;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,5 +16,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrderService extends IService<Order> {
 
-    int add(Order order);
+    /**
+     * 生成订单
+     * @param orderForm
+     * @return
+     */
+    boolean add(OrderForm orderForm);
 }

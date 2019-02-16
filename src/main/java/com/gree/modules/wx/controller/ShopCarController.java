@@ -40,8 +40,8 @@ public class ShopCarController {
 
     @ApiOperation(value = "查看购物车内商品")
     @GetMapping("/list")
-    public ResponseEntity list(){
-        List<ShopCar> list = shopCarService.queryAll();
+    public ResponseEntity list(@RequestParam Long userId){
+        List<ShopCar> list = shopCarService.queryAll(userId);
         return ResultUtil.success(list, HttpStatus.OK);
     }
 

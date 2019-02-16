@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gree.modules.wx.mapper.ShopCarMapper">
 
+    <delete id="deleteBatch" parameterType="java.util.List">
+        delete from wx_shopcar where goods_id in
+        <foreach collection="list" item="goodsId" separator="," open="(" close=")">
+            #{goodsId}
+        </foreach>
+    </delete>
 </mapper>
